@@ -145,7 +145,7 @@ guint LibPinyinGetPinyinOffset(FcitxZhuyin* zhuyin)
 
     guint len;
 
-    zhuyin_get_n_zhuyin(zhuyin->inst, &len);
+    zhuyin_get_n_phrase(zhuyin->inst, &len);
 
     auto i = FCITX_LIBZHUYIN_MIN(offset, len);
     if (i >= 1) {
@@ -405,7 +405,7 @@ void FcitxZhuyinUpdatePreedit(FcitxZhuyin* zhuyin, char* sentence)
     auto lastpos = pyoffset;
     auto curoffset = pyoffset;
     guint pinyinLen = 0;
-    zhuyin_get_n_zhuyin(zhuyin->inst, &pinyinLen);
+    zhuyin_get_n_phrase(zhuyin->inst, &pinyinLen);
     for (auto i = offset; i < pinyinLen; i ++) {
         PinyinKey* pykey = NULL;
         PinyinKeyPos* pykeypos = NULL;
@@ -434,7 +434,7 @@ void FcitxZhuyinUpdatePreedit(FcitxZhuyin* zhuyin, char* sentence)
             guint16 pykeyposLen = 0;
             zhuyin_get_zhuyin_key_rest_length(zhuyin->inst, pykeypos, &pykeyposLen);
             gchar* pystring;
-            zhuyin_get_bopomofo_string(zhuyin->inst, pykey, &pystring);
+            zhuyin_get_zhuyin_string(zhuyin->inst, pykey, &pystring);
             FcitxMessagesAddMessageAtLast(FcitxInputStateGetPreedit(input), MSG_CODE, "%s", pystring);
 
             if (curoffset + pykeyposLen <= zhuyin->cursor_pos) {
@@ -608,7 +608,7 @@ INPUT_RETURN_VALUE FcitxZhuyinGetCandWord(void* arg, FcitxCandidateWord* candWor
         auto offset = LibPinyinGetOffset(zhuyin);
 
         guint pykeysLen = 0;
-        zhuyin_get_n_zhuyin(zhuyin->inst, &pykeysLen);
+        zhuyin_get_n_phrase(zhuyin->inst, &pykeysLen);
         if (offset >= pykeysLen) {
             char* sentence = NULL;
             zhuyin_guess_sentence(zhuyin->inst);
@@ -718,14 +718,14 @@ void FcitxZhuyinReconfigure(FcitxZhuyinAddonInstance* zhuyinaddon)
     }
 
     if (config->chewingIncomplete) {
-        settings |= CHEWING_INCOMPLETE;
+        settings |= ZHUYIN_INCOMPLETE;
     }
 
     if (config->useTone) {
         settings |= USE_TONE;
     }
     settings |= IS_PINYIN;
-    settings |= IS_BOPOMOFO;
+    settings |= IS_ZHUYIN;
     if (zhuyinaddon->zhuyin_context) {
         zhuyin_set_options(zhuyinaddon->zhuyin_context, settings);
     }

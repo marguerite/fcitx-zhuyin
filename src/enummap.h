@@ -25,6 +25,6 @@
 #include "eim.h"
 
 ZhuyinScheme FcitxZhuyinTransZhuyinLayout(FCITX_ZHUYIN_LAYOUT layout);
-ZhuyinAmbiguity2 FcitxZhuyinTransAmbiguity(FCITX_AMBIGUITY ambiguity);
+PinyinAmbiguity2 FcitxZhuyinTransAmbiguity(FCITX_AMBIGUITY ambiguity);
 
 #endif

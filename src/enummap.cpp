@@ -21,7 +21,7 @@
 #include <assert.h>
 #include "enummap.h"
 
-ZhuyinAmbiguity2 FcitxZhuyinTransAmbiguity(FCITX_AMBIGUITY ambiguity)
+PinyinAmbiguity2 FcitxZhuyinTransAmbiguity(FCITX_AMBIGUITY ambiguity)
 {
     switch(ambiguity) {
         case FCITX_AMB_CiChi:
@@ -53,22 +53,22 @@ ZhuyinScheme FcitxZhuyinTransZhuyinLayout(FCITX_ZHUYIN_LAYOUT layout)
 {
     switch(layout) {
         case FCITX_ZHUYIN_STANDARD:
-            return CHEWING_STANDARD;
+            return ZHUYIN_STANDARD;
         case FCITX_ZHUYIN_IBM:
-            return CHEWING_IBM;
+            return ZHUYIN_IBM;
         case FCITX_ZHUYIN_GIN_YIEH:
-            return CHEWING_GINYIEH;
+            return ZHUYIN_GINYIEH;
         case FCITX_ZHUYIN_ET:
-            return CHEWING_ETEN;
+            return ZHUYIN_ETEN;
         case FCITX_ZHUYIN_ETEN26:
-            return CHEWING_ETEN26;
+            return ZHUYIN_ETEN26;
         case FCITX_ZHUYIN_HSU:
-            return CHEWING_HSU;
+            return ZHUYIN_HSU;
         case FCITX_ZHUYIN_STANDARD_DVORAK:
-            return CHEWING_STANDARD_DVORAK;
+            return ZHUYIN_STANDARD_DVORAK;
         case FCITX_ZHUYIN_HSU_DVORAK:
-            return CHEWING_HSU_DVORAK;
+            return ZHUYIN_HSU_DVORAK;
         default:
-            return CHEWING_STANDARD;
+            return ZHUYIN_STANDARD;
     }
 }
